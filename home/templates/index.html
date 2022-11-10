@@ -1,0 +1,41 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+    <div style="text-align:center;">   
+        <h1><a href="{% url 'index' %}">♥ 카페 도장깨기👊 ♥</a></h1>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <ul class="navbar-nav">
+            {% if login_session %}
+            <li class="nav-item">
+                <!--<a class="nav-link" href="{% url 'logout' %}">로그아웃</a>-->
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="">회원가입</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">로그인</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="">카페 기록</a>
+            </li>
+        </ul>
+      </nav>
+    <div class="container" style="text-align:center;">
+    {% block content %}
+    <div>
+        <p style="font-size: xx-large;">📚 좋았던 카페를 기록하고 공유해요 📚</p>
+    </div>
+    {% endblock %}
+    
+    </div>
+</html>
