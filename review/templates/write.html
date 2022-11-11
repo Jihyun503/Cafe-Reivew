@@ -23,5 +23,17 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=apikey&libraries=services"></script>
 <script type="text/javascript" src="/static/js/map.js"></script>
 
+<form action="" method="post">
+    {% csrf_token %}
+    <legend>리뷰 등록</legend>
+    {{form.as_p}}
+    <br>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <br>
+    <button class="btn btn-primary" onClick="history.back();return false;">취소</button>
+    <button type="submit" class="btn btn-primary" value="review">등록</button>
+</form>
 
 {% endblock %}
