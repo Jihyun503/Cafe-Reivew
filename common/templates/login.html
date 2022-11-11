@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <legend>로그인</legend>
+    {{form.as_p}}
+    <br>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <br>
+    <button type="submit" class="btn btn-primary" value="login">로그인</button>
+</form>
+{% endblock %}

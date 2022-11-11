@@ -6,4 +6,5 @@ from common.views import *
 urlpatterns = [
     path('join/', SignUp.as_view(), name = 'join'),
     path('login/', Login.as_view(), name = 'login'),
+    path('logout/', logout, name = 'logout'),
 ]
