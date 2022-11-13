@@ -1,5 +1,7 @@
 from django import forms
 from .models import *
+from django_summernote.fields import SummernoteTextField
+from django_summernote.widgets import SummernoteWidget
 
 class ReviewForm(forms.ModelForm):
     shop_name = forms.CharField(
@@ -24,7 +26,9 @@ class ReviewForm(forms.ModelForm):
         ),
     )
 
+    contents = SummernoteTextField()
 
+    '''
     contents = forms.CharField(
         label="내용",
         required=True,
@@ -35,9 +39,12 @@ class ReviewForm(forms.ModelForm):
             }
         )
     )
-
+    '''
     class Meta:
         model = Review
+        widgets = {
+            'contents' : SummernoteWidget(),
+        }
         fields = ['shop_name', 'address', 'contents']
 
 
