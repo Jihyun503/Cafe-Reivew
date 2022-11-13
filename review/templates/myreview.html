@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>내 기록</h1>
+  {% if object_list %}
+  <div class="row mt-5">
+    <div class="col-12">
+      <table class="table">
+        <thead class="thead-dark">
+        <tbody>
+          {% for review in object_list %}
+          <tr>
+            <th scope="row">{{ review.bno }}</th>
+            <td><a href="detail/{{review.bno}}" data-popup-url="detail/{{review.bno}}" class="review_detail">{{ review.shop_name }}</a></td>
+            <td>{{ review.address }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "modal.html" %}
+  </div>
+  {% else %}
+    <p>아직 작성한 리뷰가 없어요</p>
+  {% endif %}
+  
+{% endblock %}

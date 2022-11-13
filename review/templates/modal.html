@@ -1,0 +1,29 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).on("click", ".review_detail", function (e) {
+      e.preventDefault();
+      var $popup = $("#popup");
+      var popup_url = $(this).data("popup-url");
+      console.log(popup_url)
+      $(".modal-body", $popup).load(popup_url, function () {
+        $popup.modal("show");
+      });
+    });
+</script>
+
+
+<div id="popup" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
