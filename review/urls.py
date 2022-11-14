@@ -7,5 +7,8 @@ urlpatterns = [
     path('write/', WriteReview.as_view(), name = 'write'),
     path('myreview/', MyReview.as_view(), name = 'myreview'),
     path("myreview/detail/<int:pk>/", DetailReview.as_view(), name="detail"),
+    path("myreview/modify/<int:pk>/", ModifyReview.as_view(), name="modify"),
+    path("myreview/delete/<int:pk>/", deleteReview, name="delete"),
+    #path("myreview/delete/<int:pk>/", DeleteReview.as_view(), name="delete"),
     #path('map/', map, name = 'map'),
 ]

@@ -1,9 +1,9 @@
-<p class="bg-info text-white pl-2">
+<p class="text-white pl-2" style="background-color: palevioletred;">
     <!--{{inc_number}}-->
     {{object.shop_name}}
   </p>
   
   <div>
-    {{object.address}}
-    {{object.contents}}
+    <p>{{object.address}}</p>
+    {{object.contents |safe}}
   </div>

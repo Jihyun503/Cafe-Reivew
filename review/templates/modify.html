@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block content %}
+{% load static %}
+
+{% if not request.session.login_session %}
+<script type="text/javascript">
+    alert('로그인 후 이용할 수 있습니다.');
+    window.location.href = "{% url 'login' %}";
+</script>
+{% endif %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/map.css">
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+
+    <div id="menu_wrap" class="bg_white">
+        <div class="option">
+            <div>
+                <form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" value="카페" id="keyword" size="15"> 
+                    <button type="submit">검색하기</button> 
+                </form>
+            </div>
+        </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+    </div>
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=377e9fcdff2bce71f706d810318199c4&libraries=services"></script>
+<script type="text/javascript" src="/static/js/map.js"></script>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <legend>리뷰 등록</legend>
+    {{form.as_p}}
+    <br>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <br>
+    <button class="btn btn-primary" onClick="history.back();return false;">취소</button>
+    <button type="submit" class="btn btn-primary" value="review">등록</button>
+</form>
+
+{% endblock %}
