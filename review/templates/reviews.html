@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>사람들의 발자취를 확인해보세요</h1>
+  <div class="row mt-5">
+    <div class="col-12">
+        <form action="{% url 'board' %}">
+            <select name="type">
+				<option value="all">전체</option>
+				<option value="name">상호명</option>
+				<option value="content">내용</option>
+				<option value="address">주소</option>
+				<option value="writer">작성자</option>
+			</select>
+            <input name="keyword" type="text">
+            <button class="btn btn-primary" type="submit">검색</button>
+        </form>
+        <br>
+      {% if object_list %}
+      <table class="table">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">상호명</th>
+              <th scope="col">주소</th>
+              <th scope="col">작성자</th>
+            </tr>
+          </thead>
+        <tbody>
+          {% for review in object_list %}
+          <tr>
+            <th scope="row">{{ review.bno }}</th>
+            <td><a href="detail/{{review.bno}}" data-popup-url="detail/{{review.bno}}" class="review_detail">{{ review.shop_name }}</a></td>
+            <td>{{ review.address }}</td>
+            <td>{{ review.writer.nickname }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "modal.html" %}
+  </div>
+  {% else %}
+    <p>아직 작성한 리뷰가 없어요</p>
+  {% endif %}
+  
+{% endblock %}

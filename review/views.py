@@ -4,6 +4,7 @@ from .forms import *
 from common.models import User
 from .models import *
 from common.decorators import login_required
+from django.db.models import Q
 
 
 class WriteReview(CreateView):
@@ -23,6 +24,30 @@ class WriteReview(CreateView):
 class MyReview(ListView):
     template_name = "myreview.html"
     model = Review
+
+class ReviewBoard(ListView):
+    template_name = "reviews.html"
+    #model = Review
+    
+    def get_queryset(self):
+        qs = Review.objects.all()
+        keyword = self.request.GET.get("keyword", None)
+        search_type = self.request.GET.get("type", None)
+        
+        if keyword is not None:
+            if search_type == 'all':
+                qs = qs.filter(Q(shop_name__icontains=keyword)|Q(address__icontains=keyword)|Q(contents__icontains=keyword)|Q(writer__nickname__icontains=keyword))
+            elif search_type == 'name':
+                qs = qs.filter(shop_name__icontains=keyword)
+            elif search_type == 'address':
+                qs = qs.filter(address__icontains=keyword)
+            elif search_type == 'content':
+                qs = qs.filter(contents__icontains=keyword)
+            elif search_type == 'writer':
+                qs = qs.filter(writer__nickname__icontains=keyword)
+            
+        return qs
+    
 
 class DetailReview(DetailView):
     template_name = "detail.html"
